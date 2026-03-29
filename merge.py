@@ -4,7 +4,7 @@ def merge_sort(arr):
     if len(arr) <= 1:
         return
 
-    #parta de divide
+    #partea de divide
     mid = len(arr) // 2
     left = arr[:mid] 
     right = arr[mid:]
