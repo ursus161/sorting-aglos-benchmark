@@ -11,11 +11,9 @@ from sorts.merge import merge_sort
 from sorts.heap import heap_sort
 from sorts.radix import radix_sort
 
-sys.setrecursionlimit(500_000)
 
-SIZES = [10_000, 50_000, 100_000]
-RUNS = 5
-SLOW_LIMIT = 10_000  # O(n^2) doar pe 10K
+SIZES = [500, 1000, 2000, 3000, 5000]
+RUNS = 3
 
 DATA_TYPES = {
     "random": gen_random,
@@ -26,13 +24,13 @@ DATA_TYPES = {
 }
 
 ALGORITHMS = {
-    "BubbleSort":   (bubble_sort, True),
-    "CocktailSort": (cocktail_sort, True),
-    "InsertionSort":(insertion_sort, True),
-    "MergeSort":    (merge_sort, False),
-    "HeapSort":     (heap_sort, False),
-    "RadixSort":    (radix_sort, False),
-    "sorted()":     (None, False),
+    "BubbleSort":   bubble_sort,
+    "CocktailSort": cocktail_sort,
+    "InsertionSort":insertion_sort,
+    "MergeSort":    merge_sort,
+    "HeapSort":     heap_sort,
+    "RadixSort":    radix_sort,
+    "sorted()":     None,
 }
 
 
@@ -45,8 +43,7 @@ def time_sort(fn, data):
 
 def bench(fn, data):
     times = [time_sort(fn, data) for _ in range(RUNS)]
-    avg = sum(times) / len(times)
-    return round(avg, 6)
+    return round(sum(times) / len(times), 6)
 
 
 def run():
@@ -57,12 +54,7 @@ def run():
             data = gen(size)
             print(f"\n--- {dtype} | n={size} ---")
 
-            for name, (fn, slow) in ALGORITHMS.items():
-                if slow and size > SLOW_LIMIT:
-                    print(f"  SKIP {name}")
-                    results.append([name, dtype, size, ""])
-                    continue
-
+            for name, fn in ALGORITHMS.items():
                 avg = bench(fn, data)
                 print(f"  {name:15s} | {avg:.6f}s")
                 results.append([name, dtype, size, avg])
