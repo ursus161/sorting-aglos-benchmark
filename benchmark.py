@@ -1,6 +1,5 @@
 import copy
 import csv
-import sys
 import time
 
 from datagen import *
@@ -12,8 +11,8 @@ from sorts.heap import heap_sort
 from sorts.radix import radix_sort
 
 
-SIZES = [500, 1000, 2000, 3000, 5000]
-RUNS = 3
+SIZES = [500, 1000, 2000, 3000, 5000, 10_000,  25_000]
+RUNS = 5
 
 DATA_TYPES = {
     "random": gen_random,

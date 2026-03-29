@@ -58,7 +58,7 @@ def plot(rows):
         ax.set_ylabel("Timp (s)")
         ax.set_title(TITLES.get(dt, dt))
         ax.legend(fontsize=8)
-        ax.set_yscale("log")
+        ax.set_yscale("log")  # motivul ptr care toate arata ca graficul lui log n, le am pus asa ca sa incapa in grafic
         ax.grid(True, alpha=0.3)
         fig.savefig(f"{PLOTS_DIR}/{dt}.png", dpi=150, bbox_inches="tight")
         plt.close(fig)
